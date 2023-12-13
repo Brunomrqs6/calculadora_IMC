@@ -2,3 +2,35 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.form {
+    display: block;
+    margin: 0 auto;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.input {
+    margin: 10px;
+    text-align: center;
+    max-width: 120px;
+}
+
+.tabela {
+    width: 620px;
+    max-width: 60%;
+    margin: 0 auto;
+    border: 1px solid #7f8c8d;
+    border-radius: 8px;
+}
+
+.corpoTabela {
+    padding: 2px;
+    text-align: center;
+}
+
+.resultado {
+    margin: 0 auto 8px;
+    max-width: 50%;
+    text-align: center;
+}
