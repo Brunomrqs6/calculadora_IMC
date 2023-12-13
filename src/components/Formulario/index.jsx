@@ -13,26 +13,26 @@ const Formulario = () => {
         setAltura(evento.target.value)
     }
 
+    const [resultadoIMC, setResultadoIMC] = useState(null);
 
-    const mostraResposta = () => {
+
+    const calculaIMC = (evento) => {
+        evento.preventDefault();
 
         const calcula = parseFloat(peso / (altura ** 2))
         console.log(calcula)
-
         console.log(altura)
 
-
-
-        if (calcula < 18.5 && altura > 1.0) {
-            return <p className={styles.resultado}>Seu IMC foi de {calcula.toFixed(2)}, está na classificação de <span className={styles.classificacao}>Magreza</span>.</p>
-        } else if (calcula > 18.5 && calcula < 24.9 && altura > 1.0) {
-            return <p className={styles.resultado}>Seu IMC foi de {calcula.toFixed(2)}, está na classificação <span className={styles.classificacao}>Normal.</span></p>
-        } else if (calcula > 25.0 && calcula < 29.9 && altura > 1.0) {
-            return <p className={styles.resultado}>Seu IMC foi de {calcula.toFixed(2)}, está na classificação de <span className={styles.classificacao}>Sobrepreso.</span></p>
-        } else if (calcula > 30.0 && calcula < 39.0 && altura > 1.0) {
-            return <p className={styles.resultado}>Seu IMC foi de {calcula.toFixed(2)}, está na classificação de <span className={styles.classificacao}>Obesidade.</span></p>
-        } else if (calcula > 40.0 && altura > 1.0) {
-            return <p className={styles.resultado}>Seu IMC foi de {calcula.toFixed(2)}, está na classificação de <span className={styles.classificacao}>Obesidade grave.</span></p>
+        if (calcula < 18.5) {
+            setResultadoIMC(`Seu IMC foi de ${calcula.toFixed(2)}, está na classificação de Magreza.`);
+        } else if (calcula > 18.5 && calcula < 24.9) {
+            setResultadoIMC(`Seu IMC foi de ${calcula.toFixed(2)}, está na classificação Normal.`);
+        } else if (calcula > 25.0 && calcula < 29.9) {
+            setResultadoIMC(`Seu IMC foi de ${calcula.toFixed(2)}, está na classificação de Sobrepreso.`);
+        } else if (calcula > 30.0 && calcula < 39.0) {
+            setResultadoIMC(`Seu IMC foi de ${calcula.toFixed(2)}, está na classificação de Obesidade.`);
+        } else if (calcula > 40.0) {
+            setResultadoIMC(`Seu IMC foi de ${calcula.toFixed(2)}, está na classificação de Obesidade grave.`);
         }
     }
 
@@ -41,11 +41,12 @@ const Formulario = () => {
 
     return (
         <div className="container">
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={(evento) => calculaIMC(evento)}>
                 <input className={styles.input} type="number" placeholder="Peso" onChange={alteraPeso} />
                 <input className={styles.input} type="number" step={0.01} placeholder="Altura" onChange={alteraAltura} />
+                <button type="submit">Calcular</button>
             </form>
-            {mostraResposta()}
+            {resultadoIMC && <p className={styles.resultado}>{resultadoIMC}</p>}
             <table className={styles.tabela} align="center" >
                 <thead>
                     <tr>
